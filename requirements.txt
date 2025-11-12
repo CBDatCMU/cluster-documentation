@@ -1,0 +1,50 @@
+# ==========================================
+# Sphinx Documentation Environment
+# ==========================================
+
+# --- Core ---
+sphinx
+sphinx-autobuild
+sphinx-copybutton
+myst-parser
+sphinx-rtd-theme
+
+# --- Common Extensions ---
+sphinx-design
+sphinxcontrib-mermaid
+sphinxcontrib-bibtex
+sphinxcontrib-youtube
+sphinx-inline-tabs
+sphinxemoji
+sphinx-togglebutton
+sphinxext-opengraph
+
+# --- Advanced Documentation Features ---
+sphinx-autodoc-typehints
+sphinxcontrib-napoleon
+sphinx-multiversion
+sphinx-autoapi
+sphinx-gallery
+
+# --- Notebook and Code Execution ---
+nbsphinx
+jupyter-sphinx
+sphinxcontrib-programoutput
+sphinx-execute-code
+
+# --- Themes ---
+furo
+pydata-sphinx-theme
+sphinx-book-theme
+alabaster
+
+# ==========================================
+# Optional but Useful for HPC or Research Docs
+# ==========================================
+# (e.g., generating reports or visual diagrams)
+
+# Jupyter and Markdown ecosystem
+jupyter
+ipython
+markdown-it-py
+linkify-it-py
