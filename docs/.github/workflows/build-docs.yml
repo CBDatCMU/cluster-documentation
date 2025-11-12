@@ -1,0 +1,54 @@
+name: Build and Upload Docs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          sudo apt-get update && sudo apt-get install -y zip
+
+      - name: Build HTML documentation
+        run: |
+          make -C docs html
+
+      - name: Set artifact name with date
+        id: vars
+        run: echo "ARTIFACT_NAME=lane-cluster-documentation-$(date +'%Y%m%d').zip" >> $GITHUB_ENV
+
+      - name: Compress HTML folder
+        run: |
+          cd docs/build/html
+          zip -r ../../${ARTIFACT_NAME} .
+
+      - name: Delete previous artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          age: '0 days'
+          skip-tags: true
+          skip-recent: 1
+
+      - name: Upload HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: docs/${{ env.ARTIFACT_NAME }}
+          retention-days: 7
