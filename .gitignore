@@ -1,0 +1,62 @@
+# ==========================================
+# Sphinx Documentation Project .gitignore
+# ==========================================
+
+# Sphinx build artifacts
+docs/build/
+build/
+_build/
+.DS_Store
+
+# Generated API docs
+docs/source/api/
+autoapi/
+
+# Virtual environments
+.venv/
+venv/
+env/
+*.env
+
+# Conda environment directories
+conda_env/
+*.conda-env
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Jupyter / notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Editor / IDE settings
+.vscode/
+.idea/
+
+# Test / Coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+.cache/
+
+# Build outputs from other tools
+dist/
+.eggs/
+*.egg-info/
+
+# Misc
+.envrc
