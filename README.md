@@ -53,5 +53,4 @@ If you find errors or want to suggest improvements, please open an issue or pull
 
 ---
 
-© 2025 [Carnegie Mellon University](https://www.cmu.edu/).  
-Maintained by the [Ray and Stephanie Lane Computational Biology Department](https://www.cbd.cmu.edu/).
+© 2025 [Ray and Stephanie Lane Computational Biology Department](https://www.cbd.cmu.edu/) at [School of Computer Science](https://www.cs.cmu.edu/) in [Carnegie Mellon University](https://www.cmu.edu/). 
