@@ -1,6 +1,6 @@
 # Welcome to the *Lane cluster documentation*
 
-![Gates-Hillman Center](images/gates2.jpeg)
+![Gates-Hillman Center](images/gates2.jpg)
 
 This guide provides an introduction to navigating and effectively using the **[Lane Cluster](https://www.cbd.cmu.edu/research/computational-biology-cluster/)** — a high-performance computing (**HPC**) resource maintained by the **[Ray and Stephanie Lane Computational Biology Department](https://www.cbd.cmu.edu/)** at **[Carnegie Mellon University](https://www.cmu.edu/)**.
 
