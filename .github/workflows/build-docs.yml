@@ -33,17 +33,18 @@ jobs:
           make -C docs html
 
       - name: Create dated ZIP file
-        run: |
-          DATE=$(date +"%Y%m%d")
-          ZIPFILE="lane-cluster-docs-${DATE}.zip"
-          cd docs/build/html
-          zip -r "../../${ZIPFILE}" .
         shell: bash
+        run: |
+          DATE="$(date +%Y%m%d)"
+          ZIPFILE="docs-${DATE}.zip"
+          cd docs/build/html
+          # creates docs/build/docs-YYYYMMDD.zip
+          zip -r "../${ZIPFILE}" .
 
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: built-docs-zip
-          path: docs/build/*.zip
+          name: docs-zip-${{ github.ref_name }}
+          path: docs/build/docs-*.zip
           if-no-files-found: error
           retention-days: 7
