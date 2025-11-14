@@ -40,6 +40,7 @@ myst_enable_extensions = [
 
 # -- HTML -------------------------------------------------------------
 html_theme = "furo"
+html_theme = 'sphinx_rtd_theme'
 html_title = "Ray and Stephanie Lane cluster documentation"
 
 # -- Autodoc / Napoleon ----------------------------------------------

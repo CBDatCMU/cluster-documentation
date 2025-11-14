@@ -5,6 +5,6 @@ This section covers advanced usage of the Lane Cluster, including containerizati
 ```{toctree}
 :maxdepth: 1
 
+apptainer
 nextflow
-singularity
 spack
