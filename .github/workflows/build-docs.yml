@@ -2,7 +2,7 @@ name: Build Sphinx Documentation
 
 on:
   push:
-    branches: [ '*' ]
+    branches: [ "*" ]   # Run on every branch
   workflow_dispatch:
 
 permissions:
@@ -28,14 +28,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build the Sphinx HTML documentation
+      - name: Build HTML documentation
         run: |
           make -C docs html
 
-      - name: Upload built documentation
+      - name: Create dated ZIP file
+        run: |
+          DATE=$(date +"%Y%m%d")
+          ZIPFILE="lane-cluster-docs-${DATE}.zip"
+          cd docs/build/html
+          zip -r "../../${ZIPFILE}" .
+        shell: bash
+
+      - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: docs-html
-          path: docs/build/html
+          name: built-docs-zip
+          path: docs/build/*.zip
           if-no-files-found: error
           retention-days: 7
