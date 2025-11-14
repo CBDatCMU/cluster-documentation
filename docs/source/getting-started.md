@@ -42,7 +42,7 @@ Advisors do not need to provide funding or project information depending on inte
 
 ### Submit an Account Request
 
-Once approved by your sponsor, the sponsor or an admin will submit an account request using the Lane Center’s designated process. If you are a sponsor, then plase complete this [form](https://computing.cs.cmu.edu/accounts-access/forms/scs-account).
+Once approved by your sponsor, the sponsor or an admin will submit an account request using the Lane Center’s designated process. If you are a sponsor, then please complete this [form](https://computing.cs.cmu.edu/accounts-access/forms/scs-account).
 
 ### Wait for Account Provisioning
 
