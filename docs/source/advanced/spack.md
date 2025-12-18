@@ -136,7 +136,7 @@ spack install
 
 Each environment is defined by a spack.yaml file, which can be shared with collaborators to reproduce the same software stack on other nodes or systems.
 
-## Example Workflow: Installing OpenMPI
+## Example Workflow 1: Installing OpenMPI
 
 This example demonstrates installing and testing OpenMPI using Spack on a compute node in pool1.
 
@@ -167,24 +167,44 @@ mpirun --version
 
 If the command returns a version number, OpenMPI has been built and linked successfully on the compute node.
 
-## Integration with Conda and Apptainer
+## Example Workflow 2: Bioinformatics Workflo
 
-Spack complements other software management tools commonly used on the Lane Cluster:
+**Use case:**  
+A researcher needs a reproducible and isolated environment for RNA-seq analysis using tools such as HISAT2, Samtools, and Python scientific libraries.
 
-- Conda is well suited for Python-centric data analysis and lightweight workflows.
+**Approach:**  
+Spack environments are used to define package specifications, resolve complex dependency chains, and install compatible versions in a unified prefix.
 
-- Spack excels at building optimized, compiled libraries and managing complex native dependencies.
+```bash
+spack env create bio-env
+spack env activate bio-env
+spack add hisat2 samtools python@3.10 py-biopython py-numpy py-pandas
+spack concretize
+spack install
+```
 
-- Apptainer/Singularity can be used to containerize Spack-built software for portability across systems.
+### Integration with Conda and Apptainer
+
+Spack is designed to complement other software management tools commonly used in HPC environments, rather than replace them.
+
+- **Conda** is well suited for Python-centric workflows, rapid experimentation, and lightweight data analysis. It excels at managing Python packages and prebuilt binaries but offers limited control over compilers and low-level system dependencies.
+
+- **Spack** is optimized for building performance-critical, compiled software such as MPI libraries, numerical solvers, and GPU-enabled frameworks. It provides fine-grained control over compilers, build variants, and dependency resolution.
+
+- **Apptainer (Singularity)** can be used to containerize Spack-built software, enabling portability across nodes or clusters while preserving optimized native libraries.
+
+A common pattern is to use **Spack to build core system-level dependencies** (e.g., MPI, CUDA, math libraries) and layer **Conda environments or Apptainer containers** on top for application-level dependencies and reproducibility.
+
+---
 
 ## Best Practices
 
-Use Spack environments (spack env) to improve reproducibility
+- Use **Spack environments (`spack env`)** to define reproducible software stacks for projects and research workflows.
 
-Prefer building and testing software on compute nodes rather than login nodes
+- Prefer building and testing packages on **compute nodes** rather than login nodes to avoid resource limitations and build failures.
 
-Reuse previously built packages when possible:
-
+- Reuse existing builds whenever possible to reduce compilation time and disk usage:
+  
 ```bash
 spack install --reuse
 ```
