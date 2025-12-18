@@ -41,7 +41,7 @@ On most HPC systems, including the Lane Cluster, this requirement is typically s
 
 ## Installing Spack on the Lane Cluster
 
-### Using a system module (recommended)
+### Using a system module
 
 If Spack is available as a module on the Lane Cluster, load it using:
 
@@ -49,7 +49,7 @@ If Spack is available as a module on the Lane Cluster, load it using:
 module load spack
 ```
 
-### Confirm that Spack is available
+### Confirm Spack is available
 
 ```bash
 spack --version
@@ -167,7 +167,7 @@ mpirun --version
 
 If the command returns a version number, OpenMPI has been built and linked successfully on the compute node.
 
-## Example Workflow 2: Bioinformatics Workflo
+## Example Workflow 2: Bioinformatics Workflow
 
 **Use case:**  
 A researcher needs a reproducible and isolated environment for RNA-seq analysis using tools such as HISAT2, Samtools, and Python scientific libraries.
