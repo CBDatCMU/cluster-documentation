@@ -1,6 +1,8 @@
 # Welcome to the *Lane cluster documentation*
 
-![Gates-Hillman Center](images/gates2.jpg)
+```{warning}
+**lanec1.compbio.cs.cmu.edu** has been retired. The new system **lanec2.compbio.cs.cmu.edu** is now available for production.
+```
 
 This guide provides an introduction to navigating and effectively using the **[Lane Cluster](https://www.cbd.cmu.edu/research/computational-biology-cluster/)** — a high-performance computing (**HPC**) resource maintained by the **[Ray and Stephanie Lane Computational Biology Department](https://www.cbd.cmu.edu/)** at **[Carnegie Mellon University](https://www.cmu.edu/)**.
 
