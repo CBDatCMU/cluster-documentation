@@ -39,11 +39,9 @@ On most HPC systems, including the Lane Cluster, this requirement is typically s
 
 ---
 
-## Installing Spack on the Lane Cluster
+## Loading Spack on the Lane Cluster
 
-### Using a system module
-
-If Spack is available as a module on the Lane Cluster, load it using:
+Spack is available as a module on the Lane Cluster. Load it using:
 
 ```bash
 module load spack
@@ -56,26 +54,6 @@ spack --version
 ```
 
 If the command returns a version number, Spack has been loaded successfully and is ready for use.
-
-### Installing Spack locally (alternative)
-
-If Spack is not provided as a system module, it can be installed in a user directory without administrative privileges:
-
-```bash
-git clone https://github.com/spack/spack.git
-cd spack
-source share/spack/setup-env.sh
-```
-
-To make Spack available in future sessions, add the following line to your shell configuration file (e.g., ~/.bashrc or ~/.zshrc):
-
-source ~/spack/share/spack/setup-env.sh
-
-### Confirm the installation
-
-```bash
-spack --version
-```
 
 ## Basic Usage
 
