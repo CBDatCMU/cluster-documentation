@@ -6,5 +6,9 @@ This section covers advanced usage of the Lane Cluster, including containerizati
 :maxdepth: 1
 
 apptainer
+cwl
+dask
+flyte
 nextflow
 spack
+snakemake
