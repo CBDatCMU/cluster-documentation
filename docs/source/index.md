@@ -26,3 +26,4 @@ By the end of this guide, users will be familiar with the essential tools and pr
 getting-started
 basics/index
 advanced/index
+slurm/index

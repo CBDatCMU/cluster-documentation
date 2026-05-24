@@ -3,12 +3,10 @@
 This section covers advanced usage of the Lane Cluster, including containerization, workflow automation, and reproducible computing environments.
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 2
 
 apptainer
-cwl
-dask
-flyte
-nextflow
+workflows
+python
 spack
-snakemake
+```

@@ -1,5 +1,7 @@
 # Intro to Flyte
 
+![Flyte logo](../_static/images/flyte.png)
+
 Flyte is an open-source, cloud-native workflow orchestration platform designed for building scalable, reproducible, and maintainable data and machine learning pipelines. Originally developed at Lyft, Flyte is now a graduated CNCF (Cloud Native Computing Foundation) project and is widely used in production environments for scientific computing and ML workflows.
 
 Unlike shell-based workflow tools, Flyte workflows are written in Python using the `flytekit` SDK, with tasks defined as decorated functions. Flyte handles scheduling, retries, versioning, and resource allocation automatically.

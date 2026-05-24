@@ -6,3 +6,4 @@ This section covers essential skills for using the Lane Cluster, such as working
 :maxdepth: 1
 
 modules
+slurm

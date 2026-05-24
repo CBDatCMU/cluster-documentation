@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Ray and Stephanie Lane Cluster'
-copyright = '2025, Ray and Stephanie Lane Computational Biology Department'
+copyright = '2026, Ray and Stephanie Lane Computational Biology Department'
 author = 'Ivan E. Cao-Berg'
 
 version = '0.1'
@@ -26,6 +26,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.todo",
     "sphinx_autodoc_typehints",
+    "jupyter_sphinx",              # Executable Python code cells
     # Optional (uncomment if using):
     # "sphinxcontrib.bibtex",
     # "sphinxext.opengraph",
@@ -52,6 +53,22 @@ autodoc_typehints = "description"
 # autoapi_dirs = ["../src"]   # adjust to your package pat
 
 language = 'en'
+
+# -- Options for LaTeX/PDF output --------------------------------------------
+latex_engine = 'xelatex'
+latex_elements = {
+    'preamble': r'''
+\usepackage{fontspec}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{newunicodechar}
+\newunicodechar{🔍}{}
+\newunicodechar{📦}{}
+\newunicodechar{🧰}{}
+\newunicodechar{🧩}{}
+\newunicodechar{🧠}{}
+\newunicodechar{🔗}{}
+''',
+}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

@@ -1,4 +1,6 @@
-# Dask
+# Intro to Dask
+
+![Dask logo](../_static/images/dask.png)
 
 Dask is a flexible Python library for parallel and distributed computing. It scales familiar Python interfaces — NumPy, Pandas, and scikit-learn — from a single laptop to a large HPC cluster with minimal code changes. On the Lane Cluster, Dask is particularly useful for benchmarking memory and compute performance across nodes.
 
@@ -38,8 +40,9 @@ conda install -c conda-forge dask distributed bokeh
 
 Confirm the installation:
 
-```python
-python -c "import dask; print(dask.__version__)"
+```{jupyter-execute}
+import dask
+print(dask.__version__)
 ```
 
 ---
@@ -59,12 +62,12 @@ Compare the time to perform a large matrix multiplication using NumPy versus Das
 
 **benchmark_array.py:**
 
-```python
+```{jupyter-execute}
 import time
 import numpy as np
 import dask.array as da
 
-size = 10_000
+size = 2_000
 
 # NumPy benchmark
 x_np = np.random.random((size, size))
@@ -74,7 +77,7 @@ np_time = time.perf_counter() - start
 print(f"NumPy:  {np_time:.2f}s")
 
 # Dask benchmark
-x_da = da.random.random((size, size), chunks=(2000, 2000))
+x_da = da.random.random((size, size), chunks=(500, 500))
 start = time.perf_counter()
 result_da = da.dot(x_da, x_da).compute()
 dask_time = time.perf_counter() - start
@@ -82,7 +85,7 @@ print(f"Dask:   {dask_time:.2f}s")
 print(f"Speedup: {np_time / dask_time:.2f}x")
 ```
 
-Run the benchmark:
+Run the benchmark on the cluster:
 
 ```bash
 python benchmark_array.py
@@ -114,37 +117,43 @@ sbatch run_benchmark_array.sh
 
 Compare groupby aggregation performance on a large dataset using Pandas versus Dask.
 
+> **Note:** For small datasets or simple aggregations, Dask offers little to no performance improvement over Pandas. Dask introduces scheduling and partitioning overhead that outweighs any parallelism gains at small scale. The benefits become apparent only when the dataset is large enough — typically tens of millions of rows or more — and the computation is complex enough to justify splitting across partitions.
+
 **benchmark_dataframe.py:**
 
-```python
+```{jupyter-execute}
 import time
 import numpy as np
 import pandas as pd
 import dask.dataframe as dd
 
-n_rows = 10_000_000
+n_rows = 20_000_000
 
 df_pd = pd.DataFrame({
-    "group": np.random.choice(["A", "B", "C", "D"], size=n_rows),
-    "value": np.random.random(n_rows),
+    "group": np.random.choice(list("ABCDEFGH"), size=n_rows),
+    "value1": np.random.random(n_rows),
+    "value2": np.random.random(n_rows),
+    "value3": np.random.random(n_rows),
 })
 
 # Pandas benchmark
 start = time.perf_counter()
-result_pd = df_pd.groupby("group")["value"].mean()
+result_pd = df_pd.groupby("group")[["value1", "value2", "value3"]].agg(["mean", "std", "sum"])
 pd_time = time.perf_counter() - start
 print(f"Pandas: {pd_time:.2f}s")
+print(result_pd)
 
 # Dask benchmark
-df_dd = dd.from_pandas(df_pd, npartitions=16)
+df_dd = dd.from_pandas(df_pd, npartitions=8)
 start = time.perf_counter()
-result_dd = df_dd.groupby("group")["value"].mean().compute()
+result_dd = df_dd.groupby("group")[["value1", "value2", "value3"]].agg(["mean", "std", "sum"]).compute()
 dask_time = time.perf_counter() - start
-print(f"Dask:   {dask_time:.2f}s")
-print(f"Speedup: {pd_time / dask_time:.2f}x")
+print(f"\nDask:   {dask_time:.2f}s")
+print(result_dd)
+print(f"\nSpeedup: {pd_time / dask_time:.2f}x")
 ```
 
-Run the benchmark:
+Run the benchmark on the cluster:
 
 ```bash
 python benchmark_dataframe.py
@@ -174,7 +183,7 @@ sbatch run_benchmark_dataframe.sh
 
 ## Example 3: Benchmarking with the Distributed Scheduler
 
-Use the `distributed` scheduler to parallelize a CPU-bound task across multiple workers and measure throughput.
+Use the `distributed` scheduler to parallelize a CPU-bound task across multiple workers and measure throughput. This example spawns a local cluster of workers and cannot be executed at documentation build time.
 
 **benchmark_distributed.py:**
 
@@ -243,7 +252,7 @@ sbatch run_benchmark_distributed.sh
 
 ## Example 4: Scaling Across SLURM Nodes
 
-Use `dask-jobqueue` to spawn Dask workers as SLURM jobs and benchmark a large computation across multiple nodes.
+Use `dask-jobqueue` to spawn Dask workers as SLURM jobs and benchmark a large computation across multiple nodes. This example requires an active SLURM environment and cannot be executed at documentation build time.
 
 Install `dask-jobqueue`:
 

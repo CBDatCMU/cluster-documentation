@@ -1,5 +1,7 @@
 # Intro to Snakemake
 
+![Snakemake logo](../_static/images/snakemake.png)
+
 Snakemake is a workflow management system that enables reproducible and scalable data analysis. Workflows are defined in a human-readable, Python-based language and can be seamlessly scaled from a laptop to a cluster without modifying the workflow definition.
 
 ## Loading Miniconda3

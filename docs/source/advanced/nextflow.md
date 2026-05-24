@@ -1,4 +1,6 @@
-# Nextflow
+# Intro to Nextflow
+
+![Nextflow logo](../_static/images/nextflow.png)
 
 Nextflow is a workflow management system that enables scalable and reproducible scientific workflows. It uses a dataflow programming model, where processes are connected through channels, making it well suited for parallel and distributed execution on HPC clusters.
 
