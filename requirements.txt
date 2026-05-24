@@ -3,48 +3,61 @@
 # ==========================================
 
 # --- Core ---
-sphinx
-sphinx-autobuild
-sphinx-copybutton
-myst-parser
-sphinx-rtd-theme
+sphinx==9.1.0
+sphinx-autobuild==2025.8.25
+sphinx-copybutton==0.5.2
+myst-parser==5.0.0
+sphinx-rtd-theme==3.1.0
 
 # --- Common Extensions ---
-sphinx-design
-sphinxcontrib-mermaid
-sphinxcontrib-bibtex
-sphinxcontrib-youtube
-sphinx-inline-tabs
-sphinxemoji
-sphinx-togglebutton
-sphinxext-opengraph
+sphinx-design==0.7.0
+sphinxcontrib-mermaid==2.0.2
+sphinxcontrib-bibtex==2.7.0
+sphinxcontrib-youtube==1.5.0
+sphinx-inline-tabs==2025.12.21.14
+sphinxemoji==0.3.2
+sphinx-togglebutton==0.4.5
+sphinxext-opengraph==0.13.0
 
 # --- Advanced Documentation Features ---
-sphinx-autodoc-typehints
-sphinxcontrib-napoleon
-sphinx-multiversion
-sphinx-autoapi
-sphinx-gallery
+sphinx-autodoc-typehints==3.10.2
+sphinxcontrib-napoleon==0.7
+sphinx-multiversion==0.2.4
+sphinx-autoapi==3.8.0
+sphinx-gallery==0.21.0
 
 # --- Notebook and Code Execution ---
-nbsphinx
-jupyter-sphinx
-sphinxcontrib-programoutput
-sphinx-execute-code
+nbsphinx==0.9.8
+jupyter-sphinx==0.5.3
+sphinxcontrib-programoutput==0.19
+sphinx-execute-code==0.2a2
 
 # --- Themes ---
-furo
-pydata-sphinx-theme
-sphinx-book-theme
-alabaster
+furo==2025.12.19
+pydata-sphinx-theme==0.16.1
+sphinx-book-theme==1.2.0
+alabaster==1.0.0
 
 # ==========================================
 # Optional but Useful for HPC or Research Docs
 # ==========================================
-# (e.g., generating reports or visual diagrams)
 
 # Jupyter and Markdown ecosystem
-jupyter
-ipython
-markdown-it-py
-linkify-it-py
+jupyter==1.1.1
+ipython==9.2.0
+markdown-it-py==4.2.0
+linkify-it-py==2.1.0
+
+# ==========================================
+# Dask and Scientific Computing
+# ==========================================
+dask==2026.3.0
+distributed
+dask-jobqueue
+numpy==2.4.4
+pandas==3.0.2
+matplotlib
+seaborn
+bokeh
+polars==1.34.0
+duckdb==1.5.3
