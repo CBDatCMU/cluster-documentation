@@ -1,4 +1,4 @@
-name: Build and Release HTML Documentation
+name: Build and Release EPUB Documentation
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build-docs:
+  build-epub:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,27 +29,21 @@ jobs:
           pip install -r requirements.txt
           pip install requests
 
-      - name: Build HTML documentation
-        run: make -C docs html
+      - name: Build EPUB documentation
+        run: make -C docs epub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create ZIP archive
-        id: zip
-        run: |
-          DATE="$(date +%Y-%m-%d)"
-          ZIPFILE="build-${DATE}.zip"
-          cd docs/build
-          zip -r "../../${ZIPFILE}" html/
-          echo "zipfile=${ZIPFILE}" >> "$GITHUB_OUTPUT"
-          echo "date=${DATE}" >> "$GITHUB_OUTPUT"
+      - name: Get build date
+        id: meta
+        run: echo "date=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
-      - name: Delete previous docs releases
+      - name: Delete previous EPUB releases
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release list --limit 100 --json tagName --jq '.[].tagName' \
-            | grep '^docs-' \
+            | grep '^epub-' \
             | while read tag; do
                 echo "Deleting release and tag: $tag"
                 gh release delete "$tag" --yes --cleanup-tag
@@ -59,9 +53,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DATE="${{ steps.zip.outputs.date }}"
-          ZIPFILE="${{ steps.zip.outputs.zipfile }}"
-          gh release create "docs-${DATE}" \
+          DATE="${{ steps.meta.outputs.date }}"
+          gh release create "epub-${DATE}" \
             --title "${DATE}" \
-            --notes "HTML documentation build from $(date -u '+%Y-%m-%d %H:%M UTC')" \
-            "${ZIPFILE}"
+            --notes "EPUB documentation build from $(date -u '+%Y-%m-%d %H:%M UTC')" \
+            docs/build/epub/*.epub
