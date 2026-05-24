@@ -2,7 +2,7 @@ name: Build and Release PDF Documentation
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
   workflow_dispatch:
 
 permissions:
