@@ -103,14 +103,14 @@ The wrapper passes the correct include paths and library flags to the underlying
 ### Interactive (for testing)
 
 ```bash
-srun --ntasks=4 --partition=cpu --time=00:10:00 mpirun -np 4 ./my_program
+srun --ntasks=4 --partition=cpu --time=00:10:00 ./my_program
 ```
 
-Or use `salloc` to get an allocation first, then run interactively:
+Or use `salloc` to get an interactive allocation first, then run inside it:
 
 ```bash
 salloc --ntasks=4 --partition=cpu --time=01:00:00
-mpirun -np 4 ./my_program
+srun ./my_program
 exit
 ```
 
@@ -297,6 +297,7 @@ int main(int argc, char *argv[]) {
 ```c
 #include <mpi.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
@@ -306,7 +307,9 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     int chunk = 4;
-    int send_buf[size * chunk], recv_buf[chunk], result_buf[size * chunk];
+    int *send_buf    = (int *)malloc(size * chunk * sizeof(int));
+    int *recv_buf    = (int *)malloc(chunk * sizeof(int));
+    int *result_buf  = (int *)malloc(size * chunk * sizeof(int));
 
     if (rank == 0)
         for (int i = 0; i < size * chunk; i++) send_buf[i] = i;
@@ -324,6 +327,7 @@ int main(int argc, char *argv[]) {
         printf("\n");
     }
 
+    free(send_buf); free(recv_buf); free(result_buf);
     MPI_Finalize();
     return 0;
 }
@@ -387,7 +391,7 @@ int main(int argc, char *argv[]) {
 #SBATCH --mem-per-cpu=1G
 
 module load openmpi
-mpicc -O2 -o pi pi.c -lm
+# Compile on the login node before submitting: mpicc -O2 -o pi pi.c -lm
 srun ./pi
 ```
 
@@ -464,7 +468,7 @@ int main(int argc, char *argv[]) {
 #SBATCH --mem-per-cpu=2G
 
 module load openmpi
-mpicc -O2 -o matvec matvec.c
+# Compile on the login node before submitting: mpicc -O2 -o matvec matvec.c
 srun ./matvec
 ```
 
@@ -500,6 +504,12 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+    if (argc < 2) {
+        if (rank == 0) fprintf(stderr, "Usage: %s <directory>\n", argv[0]);
+        MPI_Finalize();
+        return 1;
+    }
+
     /* argv[1] is the directory; each rank processes file <rank>.txt */
     char filename[256];
     snprintf(filename, sizeof(filename), "%s/%d.txt", argv[1], rank);
@@ -531,7 +541,7 @@ int main(int argc, char *argv[]) {
 #SBATCH --mem-per-cpu=2G
 
 module load openmpi
-mpicc -O2 -o wordcount wordcount.c
+# Compile on the login node before submitting: mpicc -O2 -o wordcount wordcount.c
 srun ./wordcount /path/to/text/files
 ```
 
@@ -550,6 +560,6 @@ srun ./wordcount /path/to/text/files
 
 ## References
 
-- OpenMPI documentation: [https://www.open-mpi.org/doc/]
-- MPI standard: [https://www.mpi-forum.org/docs/]
-- OpenMPI GitHub: [https://github.com/open-mpi/ompi]
+- [OpenMPI documentation](https://docs.open-mpi.org/)
+- [MPI standard](https://www.mpi-forum.org/docs/)
+- [OpenMPI GitHub](https://github.com/open-mpi/ompi)
