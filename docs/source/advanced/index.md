@@ -6,6 +6,7 @@ This section covers advanced usage of the Lane Cluster, including containerizati
 :maxdepth: 2
 
 apptainer
+openmpi
 workflows
 python
 spack
