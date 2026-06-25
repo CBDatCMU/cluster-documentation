@@ -165,8 +165,8 @@ This produces `python_3.11-slim.sif` in the current directory. The image is pull
 | Scientific tool | [aspera-connect](https://github.com/CBDatCMU/singularity-aspera-connect) | — | — |
 | Scientific tool | [augustus](https://github.com/CBDatCMU/singularity-augustus) | — | — |
 | Utility | [aws-cli](https://github.com/CBDatCMU/singularity-aws-cli) | — | — |
-| Scientific tool | [bamtools](https://github.com/CBDatCMU/singularity-bamtools) | — | — |
-| Utility | [bat](https://github.com/CBDatCMU/singularity-bat) | — | — |
+| Scientific tool | [bamtools](https://github.com/CBDatCMU/singularity-bamtools) | v2.5.2 | 2026-05-21 |
+| Utility | [bat](https://github.com/CBDatCMU/singularity-bat) | v0.26.1 | 2026-05-12 |
 | Scientific tool | [bcftools](https://github.com/CBDatCMU/singularity-bcftools) | — | — |
 | Scientific tool | [bedops](https://github.com/CBDatCMU/singularity-bedops) | — | — |
 | Scientific tool | [bedtools](https://github.com/CBDatCMU/singularity-bedtools) | — | — |
@@ -186,7 +186,7 @@ This produces `python_3.11-slim.sif` in the current directory. The image is pull
 | Scientific tool | [cutadapt](https://github.com/CBDatCMU/singularity-cutadapt) | — | — |
 | Utility | [cwltool](https://github.com/CBDatCMU/singularity-cwltool) | — | — |
 | Utility | [dua](https://github.com/CBDatCMU/singularity-dua) | — | — |
-| Utility | [dust](https://github.com/CBDatCMU/singularity-dust) | — | — |
+| Utility | [dust](https://github.com/CBDatCMU/singularity-dust) | v1.2.4 | — |
 | Scientific tool | [fastani](https://github.com/CBDatCMU/singularity-fastani) | — | — |
 | Scientific tool | [fastq-tools](https://github.com/CBDatCMU/singularity-fastq-tools) | — | — |
 | Scientific tool | [fastqc](https://github.com/CBDatCMU/singularity-fastqc) | — | — |
