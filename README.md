@@ -25,8 +25,8 @@ Required for **all** builds.
 
 ```bash
 # Clone this repository
-git clone https://github.com/CBDatCMU/cluster-documentation.git
-cd cluster-documentation
+git clone https://github.com/CBDatCMU/lanec2-docs.git
+cd lanec2-docs
 
 # Create and activate a conda environment
 conda create -n lane-documentation python=3.12 -y
@@ -123,8 +123,8 @@ That step runs `docs/generate_containers_table.py`, which queries the GitHub API
 To set the project up from scratch:
 
 1. Sign in to [readthedocs.org](https://readthedocs.org) with GitHub.
-2. **Import a Project**, connect the `CBDatCMU` organization, and select `cluster-documentation`. An organization owner must authorize the Read the Docs GitHub App so it can install the webhook.
-3. Set the project **Name** to `lanec2` so the published URL is `lanec2.readthedocs.io`. Read the Docs derives the slug from the name, so leaving it as the repository name would publish to `cluster-documentation.readthedocs.io`.
+2. **Import a Project**, connect the `CBDatCMU` organization, and select `lanec2-docs`. An organization owner must authorize the Read the Docs GitHub App so it can install the webhook.
+3. Set the project **Name** to `lanec2` so the published URL is `lanec2.readthedocs.io`. Read the Docs derives the slug from the name, so leaving it as the repository name would publish to `lanec2-docs.readthedocs.io`.
 4. Add the `GITHUB_TOKEN` environment variable described above.
 5. Push to `main`. The webhook triggers a build.
 

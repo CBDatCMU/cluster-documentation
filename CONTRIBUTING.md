@@ -10,7 +10,7 @@ Thank you for your interest in contributing! Contributions that improve function
    - Click the **Fork** button on the repository page.
    - Clone your fork locally:
      ```bash
-     git clone https://github.com/CBDatCMU/cluster-documentation.git
+     git clone https://github.com/CBDatCMU/lanec2-docs.git
      cd your-repo
      ```
 
