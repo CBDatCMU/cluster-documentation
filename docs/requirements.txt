@@ -1,0 +1,47 @@
+# ==========================================
+# Documentation build dependencies
+# ==========================================
+#
+# What Sphinx needs to render these docs. Used by Read the Docs and by CI.
+#
+# This is NOT just the Sphinx packages. conf.py loads jupyter_sphinx, and
+# several pages under source/advanced/ use `{jupyter-execute}` blocks that run
+# real code at build time — so the libraries those cells import are hard build
+# dependencies. Removing them does not make the build lighter, it breaks it.
+#
+# The root requirements.txt additionally carries tooling for working on the
+# cluster (distributed, dask-jobqueue, matplotlib, seaborn, bokeh, jupyter,
+# sphinx-autobuild, alternate themes). Those appear only in non-executed code
+# blocks, so they are deliberately absent here.
+
+# --- Core ---
+sphinx
+myst-parser==5.0.0
+sphinx-rtd-theme==3.1.0
+
+# conf.py sets myst_enable_extensions = [..., "linkify", ...], which MyST
+# refuses to start without.
+linkify-it-py==2.1.0
+
+# --- Extensions loaded in conf.py ---
+sphinx-copybutton==0.5.2
+sphinx-design==0.7.0
+sphinxcontrib-mermaid==2.0.2
+sphinx-autodoc-typehints==3.10.2
+jupyter-sphinx==0.5.3
+
+# jupyter-sphinx executes code cells and needs a kernel available.
+ipykernel
+
+# --- Imported by {jupyter-execute} cells, executed at build time ---
+# source/advanced/dask.md, duckdb.md, polars.md, pandas.md, numpy.md
+# dask.dataframe imports pyarrow, so the [dataframe] extra is required —
+# a bare `dask` install fails at build time with ModuleNotFoundError: pyarrow.
+dask[dataframe]==2026.3.0
+duckdb==1.5.3
+numpy==2.4.4
+pandas==3.0.2
+polars==1.34.0
+
+# --- Required by docs/generate_containers_table.py ---
+requests

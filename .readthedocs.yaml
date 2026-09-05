@@ -1,0 +1,39 @@
+# Read the Docs build configuration
+# https://docs.readthedocs.io/en/stable/config-file/v2.html
+#
+# Published at https://lanec2.readthedocs.io
+
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    # 3.12 or newer is required: sphinx-autodoc-typehints 3.10.2 declares
+    # Requires-Python >=3.12, and pip silently resolves to an ancient 3.6.x
+    # on 3.11 or fails outright.
+    python: "3.12"
+  jobs:
+    # Read the Docs invokes sphinx-build directly and ignores docs/Makefile,
+    # so the `generate-containers` prerequisite of the `html` target never
+    # runs. Invoke it here instead, otherwise apptainer.md is published
+    # without the containers table.
+    #
+    # The script queries the GitHub API for CBDatCMU/singularity-* repos.
+    # Set GITHUB_TOKEN under Admin > Environment Variables in the Read the
+    # Docs project, or the build will hit the 60 requests/hour anonymous
+    # rate limit.
+    pre_build:
+      - python docs/generate_containers_table.py
+
+sphinx:
+  configuration: docs/source/conf.py
+  fail_on_warning: false
+
+# HTML is always built. These add downloadable formats to the version menu.
+formats:
+  - pdf
+  - epub
+
+python:
+  install:
+    - requirements: docs/requirements.txt
